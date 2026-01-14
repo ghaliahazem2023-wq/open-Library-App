@@ -1,0 +1,24 @@
+<section class="page-favorites">
+  <header class="fav-header">
+    <h2>Favoris</h2>
+    <div>
+      <button class="btn" (click)="exportFavorites()">Exporter (CSV)</button>
+    </div>
+  </header>
+
+  <div *ngIf="message" class="message">{{ message }}</div>
+
+  <div class="fav-grid">
+    <article class="fav-card" *ngFor="let it of items">
+      <img class="cover" [src]="it.cover_id ? ('https://covers.openlibrary.org/b/id/' + it.cover_id + '-M.jpg') : 'https://via.placeholder.com/140x200?text=No+Cover'" [alt]="it.title" />
+      <h3>{{ it.title }}</h3>
+      <div class="actions">
+        <button (click)="goToDetail(it)" class="btn small">Voir</button>
+        <button (click)="downloadBook(it)" class="btn small">Télécharger</button>
+        <button (click)="remove(it)" class="btn btn-ghost">Supprimer</button>
+      </div>
+    </article>
+  </div>
+
+  <div *ngIf="items.length === 0" class="empty">Vous n'avez aucun favori.</div>
+</section> 

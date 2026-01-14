@@ -1,0 +1,35 @@
+<section class="page-explore">
+  <header class="explore-header">
+    <h2>Explore</h2>
+    <div class="controls">
+      <input type="search" [(ngModel)]="query" (keyup.enter)="search()" placeholder="Rechercher un titre" aria-label="Rechercher" />
+      <button (click)="search()" class="btn">Rechercher</button>
+      <button (click)="query=''; loadBooks()" class="btn btn-ghost">Réinitialiser</button>
+    </div>
+  </header>
+
+  <div *ngIf="message" class="message">{{ message }}</div>
+
+  <div *ngIf="loading" class="spinner" aria-hidden="true" title="Chargement"></div>
+
+  <div class="explore-grid" *ngIf="!loading">
+    <article class="card" *ngFor="let b of books">
+      <img class="cover" [src]="getCoverUrl(b.cover_id)" [alt]="b.title" />
+      <div class="meta">
+        <h3 class="title">{{ b.title }}</h3>
+        <div class="authors">{{ b.authors.join(', ') || 'Auteur inconnu' }}</div>
+        <div class="year">{{ b.first_publish_year || '—' }}</div>
+      </div>
+
+      <div class="card-actions">
+        <button (click)="toggleFavorite(b)" [title]="isFavorite(b) ? 'Retirer des favoris' : 'Ajouter aux favoris'">
+          <span *ngIf="isFavorite(b)">⭐</span>
+          <span *ngIf="!isFavorite(b)">☆</span>
+        </button>
+        <button (click)="goToDetail(b)" class="btn small">Voir</button>
+      </div>
+    </article>
+  </div>
+
+  <div *ngIf="!loading && books.length === 0" class="empty">Aucun résultat.</div>
+</section> 

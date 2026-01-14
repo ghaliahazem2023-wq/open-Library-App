@@ -1,0 +1,185 @@
+/* src/app/components/head-bar/header.component.scss */
+
+.head-bar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(90deg, var(--bg-surface), rgba(0,0,0,0.06));
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.head-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.logo-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--accent), var(--accent-strong));
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.head-bar-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  letter-spacing: 0.06em;
+}
+
+.head-bar-nav {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.head-bar-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  position: relative;
+  transition: color 0.12s ease;
+}
+
+.head-bar-nav a.active {
+  color: var(--text-main);
+}
+
+.head-bar-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  transition: width 0.15s ease;
+  border-radius: 10px;
+}
+
+.head-bar-nav a:hover::after,
+.head-bar-nav a.active::after {
+  width: 100%;
+}
+
+.head-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.theme-toggle,
+.download-btn,
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: transparent;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.theme-toggle span { display:inline-block; transition: transform 0.18s ease; }
+.theme-toggle:active span { transform: rotate(-18deg) scale(0.96); }
+
+.theme-toggle:focus, .download-btn:focus, .user-avatar:focus {
+  outline: 2px solid rgba(56,189,248,0.18);
+  outline-offset: 2px;
+}
+.theme-toggle:hover,
+.download-btn:hover,
+.user-avatar:hover {
+  transform: translateY(-2px);
+}
+
+.download-menu {
+  position: absolute;
+  right: 2rem;
+  margin-top: 0.6rem;
+  background: var(--bg-card);
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 210px;
+  z-index: 80;
+}
+
+.download-menu button {
+  background: transparent;
+  color: var(--text-main);
+  border: none;
+  text-align: left;
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+}
+
+.download-menu button:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.user-menu {
+  position: absolute;
+  right: 1rem;
+  margin-top: 0.6rem;
+  background: var(--bg-card);
+  padding: 0.4rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 80;
+}
+
+.user-menu a,
+.user-menu button {
+  color: var(--text-main);
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  padding: 0.45rem 0.6rem;
+}
+
+.user-menu a:hover,
+.user-menu button:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Responsive: hide nav on small screens and make more compact */
+@media (max-width: 768px) {
+  .head-bar {
+    padding-inline: 1rem;
+  }
+
+  .head-bar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .head-bar-actions { gap: 0.4rem; }
+}

@@ -11,7 +11,48 @@ import { Component } from '@angular/core';
   styleUrls: ['./head-bar.component.css'], // Fichier(s) CSS associé(s).
 })
 export class HeadBarComponent {
-  // Propriété titre utilisée dans le template pour afficher le nom de l'application.
-  appTitle: string = 'Open Library App';
+  isMobileNavOpen: boolean = false;
+  isDownloadOpen: boolean = false;
+  isDownloading: boolean = false;
+  isUserMenuOpen: boolean = false;
+  // Etat local pour le mode sombre / clair (true = sombre).
+  isDarkMode: boolean = true;
+
+  constructor() {
+    // Au chargement, on peut récupérer la préférence stockée plus tard (optionnel pour l'instant).
+  }
+
+  // Bascule entre sombre et clair (ici uniquement visuel, sans logique complexe).
+  toggleTheme(): void {
+    this.isDarkMode = !this.isDarkMode;
+  }
+
+  toggleMobileNav(): void {
+    this.isMobileNavOpen = !this.isMobileNavOpen;
+  }
+
+  toggleDownloadMenu(): void {
+    this.isDownloadOpen = !this.isDownloadOpen;
+  }
+
+  exportCurrentList(): void {
+    // Logique pour exporter la liste actuelle
+  }
+
+  exportFavorites(): void {
+    // Logique pour exporter les favoris
+  }
+
+  downloadBookPlaceholder(): void {
+    // Logique pour télécharger un livre de remplacement
+  }
+
+  toggleUserMenu(): void {
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
+  logout(): void {
+    // Logique pour la déconnexion
+  }
 }
 

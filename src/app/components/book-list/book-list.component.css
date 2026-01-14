@@ -26,20 +26,24 @@
 
 .book-card {
   background: radial-gradient(circle at top, rgba(56, 189, 248, 0.12), rgba(15, 23, 42, 0.96));
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   border: 1px solid rgba(148, 163, 184, 0.25);
-  padding: 0.85rem;
+  padding: 0.85rem 0.9rem 0.9rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.78);
+  box-shadow: var(--shadow-soft);
 }
 
 .book-card:hover {
   transform: translateY(-4px);
   border-color: rgba(56, 189, 248, 0.6);
   box-shadow: 0 22px 60px rgba(8, 47, 73, 0.95);
+}
+
+.book-card-image-wrapper {
+  position: relative;
 }
 
 .book-card img {
@@ -49,6 +53,24 @@
   margin-bottom: 0.7rem;
   object-fit: cover;
   background-color: #020617;
+}
+
+.book-badges {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.badge {
+  padding: 0.14rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  background-color: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.6);
 }
 
 .book-info h2 {
@@ -62,3 +84,76 @@
   font-size: 0.8rem;
   color: var(--text-muted);
 }
+
+.book-extra {
+  margin-top: 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rating {
+  display: flex;
+  gap: 0.1rem;
+  font-size: 0.82rem;
+}
+
+.star {
+  color: #4b5563;
+}
+
+.star.filled {
+  color: #facc15;
+}
+
+.quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.icon-btn {
+  min-width: 34px;
+  height: 34px;
+  padding: 0.2rem;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+
+.icon-btn span.filled {
+  color: #fb7185;
+}
+
+.icon-btn:hover {
+  transform: translateY(-2px);
+  color: var(--text-main);
+  background: rgba(255,255,255,0.02);
+}
+
+.icon-btn:focus {
+  outline: 2px solid rgba(56,189,248,0.14);
+  outline-offset: 2px;
+}
+
+/* small inline spinner */
+.small-spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.12);
+  border-top-color: var(--accent);
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+

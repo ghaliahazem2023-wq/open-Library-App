@@ -1,5 +1,9 @@
 # OpenLibraryApp
 
+**Recent changes:**
+- ✅ Header improvements: responsive layout, dark/light theme toggle (persisted in localStorage), download menu (CSV/PDF placeholders), and tooltips for logo/avatar.
+- ✅ Added routes & placeholder pages: `/explore`, `/favorites`, `/about` with active route styling and responsive nav.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.10.
 
 ## Development server

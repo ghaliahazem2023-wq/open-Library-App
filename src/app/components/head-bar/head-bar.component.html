@@ -1,11 +1,40 @@
 <!-- src/app/components/head-bar/head-bar.component.html -->
-<!-- Barre de titre simple en haut de l'application. -->
+<!-- Barre de titre avancée : navigation, thème, téléchargements, menu utilisateur -->
 
 <header class="head-bar">
-  <!-- Titre principal avec emoji livre -->
-  <h1 class="head-bar-title">
-    <span class="head-bar-emoji">📚</span>
-    <span class="head-bar-text">IHEC Library Connect</span>
-  </h1>
+  <!-- Zone logo / marque -->
+  <div class="head-bar-left">
+    <a class="logo-circle" routerLink="/" title="Accueil (IL)" aria-label="Accueil">IL</a>
+    <h1 class="head-bar-title">
+      <span class="head-bar-emoji">📚</span>
+      <span class="head-bar-text">IHEC Library Connect</span>
+    </h1>
+  </div>
+
+  <!-- Navigation principale -->
+  <nav class="head-bar-nav" role="navigation" aria-label="Main navigation">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
+    <a routerLink="/explore" routerLinkActive="active">Explore</a>
+    <a routerLink="/favorites" routerLinkActive="active">Favoris</a>
+  </nav>
+
+  <!-- Zone actions (thème + avatar) -->
+  <div class="head-bar-actions">
+    <!-- Theme toggle -->
+    <button class="theme-toggle" (click)="toggleTheme()" type="button" [title]="isDarkMode ? 'Mode sombre' : 'Mode clair'">
+      <span *ngIf="isDarkMode; else lightIcon">🌙</span>
+      <ng-template #lightIcon>☀️</ng-template>
+    </button>
+
+    <!-- User avatar (click opens menu) -->
+    <button class="user-avatar" (click)="toggleUserMenu()" [title]="'IH — Mon profil'" aria-haspopup="true" [attr.aria-expanded]="isUserMenuOpen">
+      <span>IH</span>
+    </button>
+
+    <div class="user-menu" *ngIf="isUserMenuOpen" role="menu" aria-label="Menu utilisateur">
+      <a routerLink="/profile">Profil</a>
+      <button type="button" (click)="logout()">Se déconnecter</button>
+    </div>
+  </div>
 </header>
 

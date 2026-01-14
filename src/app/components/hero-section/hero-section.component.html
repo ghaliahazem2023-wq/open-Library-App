@@ -1,0 +1,46 @@
+<!-- src/app/components/hero-section/hero-section.component.html -->
+<!-- Section de mise en avant avec grand titre et statistiques. -->
+
+<section class="hero">
+  <div class="hero-content">
+    <h2 class="hero-title">
+      Votre passerelle vers le savoir
+      <span>numérique</span>
+    </h2>
+    <p class="hero-tagline">
+      Explorez des milliers de ressources issues de l’Open Library pour nourrir vos projets,
+      mémoires et recherches à l’IHEC.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-value">10 000+</span>
+        <span class="stat-label">Ouvrages tech</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">120+</span>
+        <span class="stat-label">Catégories</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">24/7</span>
+        <span class="stat-label">Accès en ligne</span>
+      </div>
+    </div>
+
+    <button type="button" class="hero-cta" (click)="scrollToBooks()">
+      Explorer la collection
+    </button>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-orbit hero-orbit-outer"></div>
+    <div class="hero-orbit hero-orbit-inner"></div>
+    <div class="hero-book-card">
+      <div class="hero-book-icon">📖</div>
+      <p class="hero-book-text">
+        Recherchez, filtrez et découvrez des ouvrages spécialisés en quelques clics.
+      </p>
+    </div>
+  </div>
+</section>
+

@@ -23,6 +23,9 @@ export class BookListComponent implements OnInit {
   // Message d'erreur éventuel à afficher.
   errorMessage: string | null = null;
 
+  // Ensemble de clés de livres marqués comme favoris (simple simulation locale).
+  private favoriteKeys = new Set<string>();
+
   constructor(
     // On injecte le service qui s'occupe des appels HTTP.
     private bookService: BookService,
@@ -129,6 +132,79 @@ export class BookListComponent implements OnInit {
     }
     // Image neutre si pas de couverture.
     return 'https://via.placeholder.com/128x193?text=No+Cover';
+  }
+
+  // Génère quelques badges en fonction de règles simples (nouveau, populaire, recommandé).
+  getBadges(book: Book): string[] {
+    const badges: string[] = [];
+
+    if (book.first_publish_year && book.first_publish_year >= 2015) {
+      badges.push('Nouveau');
+    }
+
+    if (book.edition_count && book.edition_count > 5) {
+      badges.push('Populaire');
+    }
+
+    if (badges.length === 0) {
+      badges.push('Recommandé');
+    }
+
+    return badges;
+  }
+
+  // Calcul d'une "note" simple en fonction du nombre d'éditions.
+  getRating(book: Book): number {
+    const base = Math.min(book.edition_count || 1, 20);
+    return Math.max(1, Math.min(5, Math.round(base / 4)));
+  }
+
+  // Retourne un tableau de 5 éléments pour afficher les étoiles.
+  getStars(_book: Book): number[] {
+    return [0, 1, 2, 3, 4];
+  }
+
+
+  // Per-book downloading state (set of keys currently downloading)
+  public downloadingKeys = new Set<string>();
+
+  // Télécharge les détails d'un livre sous forme de JSON.
+  public downloadBook(book: Book): void {
+    const workId = book.key.split('/').pop();
+    const key = book.key;
+    if (!workId) return;
+
+    // Protect against duplicate clicks
+    if (this.downloadingKeys.has(key)) return;
+    this.downloadingKeys.add(key);
+
+    // Try to fetch full work details; fallback to basic book object
+    this.bookService.getBookById(workId).subscribe({
+      next: (detail) => {
+        const filename = `${(detail.title || 'book').replace(/\s+/g, '-')}.json`;
+        const blob = new Blob([JSON.stringify(detail, null, 2)], { type: 'application/json' });
+        this.downloadBlob(filename, blob);
+        this.downloadingKeys.delete(key);
+      },
+      error: () => {
+        // fallback: download minimal info
+        const minimal = { key: book.key, title: book.title, year: book.first_publish_year };
+        const filename = `${(book.title || 'book').replace(/\s+/g, '-')}.json`;
+        const blob = new Blob([JSON.stringify(minimal, null, 2)], { type: 'application/json' });
+        this.downloadBlob(filename, blob);
+        this.downloadingKeys.delete(key);
+      },
+    });
+  }
+
+  private downloadBlob(filename: string, data: any): void {
+    const blob = data instanceof Blob ? data : new Blob([data], { type: 'application/octet-stream' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
 
   // Navigation vers la page de détails au clic sur un livre.

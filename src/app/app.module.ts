@@ -12,6 +12,9 @@ import { HeadBarComponent } from './components/head-bar/head-bar.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
+import { HeroSectionComponent } from './components/hero-section/hero-section.component';
+import { ExploreComponent } from './components/explore/explore.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 @NgModule({
   // Déclaration de tous les composants utilisés dans ce module.
@@ -21,6 +24,9 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
     SearchBarComponent,
     BookListComponent,
     BookDetailsComponent,
+    HeroSectionComponent,
+    ExploreComponent,
+    FavoritesComponent,
   ],
   // Import des autres modules nécessaires.
   imports: [

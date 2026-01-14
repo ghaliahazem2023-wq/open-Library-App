@@ -1,10 +1,13 @@
 <!-- src/app/components/book-list/book-list.component.html -->
-<!-- Page principale affichant la barre de recherche et la grille de livres. -->
-
-<!-- On inclut le composant de recherche et on s'abonne à son évènement (search). -->
-<app-search-bar (search)="onSearch($event)"></app-search-bar>
+<!-- Page principale : hero, recherche avancée et grille de livres. -->
 
 <main class="book-list-container">
+  <!-- Section héro -->
+  <app-hero-section></app-hero-section>
+
+  <!-- Barre de recherche avancée -->
+  <app-search-bar (search)="onSearch($event)"></app-search-bar>
+
   <!-- Affichage du message de chargement si isLoading est true -->
   <p *ngIf="isLoading" class="info-message">
     Chargement des livres...
@@ -23,17 +26,25 @@
     </p>
 
     <!-- Grille de livres -->
-    <div class="books-grid" *ngIf="booksList.length > 0">
+    <div id="books-grid" class="books-grid" *ngIf="booksList.length > 0">
       <!-- On parcourt la liste de livres avec *ngFor -->
       <article
         class="book-card"
         *ngFor="let book of booksList"
         (click)="goToDetails(book)"
       >
-        <img
-          [src]="getCoverUrl(book)"
-          [alt]="book.title"
-        />
+        <div class="book-card-image-wrapper">
+          <img
+            [src]="getCoverUrl(book)"
+            [alt]="book.title"
+          />
+          <div class="book-badges">
+            <span *ngFor="let badge of getBadges(book)" class="badge">
+              {{ badge }}
+            </span>
+          </div>
+        </div>
+
         <div class="book-info">
           <h2>{{ book.title }}</h2>
           <p *ngIf="book.first_publish_year">
@@ -42,6 +53,24 @@
           <p *ngIf="book.edition_count">
             Nombre d'éditions : {{ book.edition_count }}
           </p>
+        </div>
+
+        <div class="book-extra">
+          <div class="rating">
+            <span
+              *ngFor="let star of getStars(book); let i = index"
+              class="star"
+              [class.filled]="i < getRating(book)"
+            >
+              ★
+            </span>
+          </div>
+          <div class="quick-actions">
+            <button type="button" class="icon-btn" (click)="downloadBook(book); $event.stopPropagation()" [attr.aria-disabled]="downloadingKeys.has(book.key)" [title]="downloadingKeys.has(book.key) ? 'Téléchargement…' : 'Télécharger ce livre'">
+              <span *ngIf="!downloadingKeys.has(book.key)">📥</span>
+              <span *ngIf="downloadingKeys.has(book.key)" class="small-spinner" aria-hidden="true"></span>
+            </button>
+          </div>
         </div>
       </article>
     </div>
