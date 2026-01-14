@@ -1,0 +1,116 @@
+/* src/app/components/search-bar/search-bar.component.css */
+/* Barre de recherche type "neumorphism" + icônes dans les inputs. */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2.5rem 0.75rem;
+  background: transparent;
+  flex-wrap: wrap;
+}
+
+.search-fields {
+  display: flex;
+  flex: 1;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.search-field-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0.15rem;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #020617, #020819);
+  box-shadow:
+    6px 6px 14px rgba(0, 0, 0, 0.85),
+    -4px -4px 10px rgba(148, 163, 184, 0.08);
+}
+
+.field-icon {
+  position: absolute;
+  left: 0.9rem;
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.search-field-wrapper input {
+  flex: 1;
+  padding: 0.55rem 0.95rem 0.55rem 2.2rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background-color: rgba(15, 23, 42, 0.9);
+  color: var(--text-main);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.search-field-wrapper input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-field-wrapper input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.6);
+  background-color: #020617;
+  transform: translateY(-1px);
+}
+
+.search-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  color: #f9fafb;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.95),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
+  white-space: nowrap;
+}
+
+.button-icon {
+  font-size: 1.05rem;
+}
+
+.search-button:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.98),
+    0 0 0 1px rgba(56, 189, 248, 0.6);
+  filter: brightness(1.03);
+}
+
+.search-button:active {
+  transform: translateY(0) scale(0.99);
+  box-shadow:
+    0 8px 18px rgba(15, 23, 42, 0.95),
+    0 0 0 1px rgba(15, 23, 42, 1);
+}
+
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-fields {
+    flex-direction: column;
+  }
+
+  .search-button {
+    align-self: flex-end;
+  }
+}

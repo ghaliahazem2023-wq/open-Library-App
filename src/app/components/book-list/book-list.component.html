@@ -1,0 +1,50 @@
+<!-- src/app/components/book-list/book-list.component.html -->
+<!-- Page principale affichant la barre de recherche et la grille de livres. -->
+
+<!-- On inclut le composant de recherche et on s'abonne à son évènement (search). -->
+<app-search-bar (search)="onSearch($event)"></app-search-bar>
+
+<main class="book-list-container">
+  <!-- Affichage du message de chargement si isLoading est true -->
+  <p *ngIf="isLoading" class="info-message">
+    Chargement des livres...
+  </p>
+
+  <!-- Affichage du message d'erreur si errorMessage n'est pas null -->
+  <p *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </p>
+
+  <!-- Si pas d'erreur et pas de chargement, on affiche la grille -->
+  <section *ngIf="!isLoading && !errorMessage">
+    <!-- Si la liste est vide, on affiche un message d'information -->
+    <p *ngIf="booksList.length === 0" class="info-message">
+      Aucun livre trouvé pour ces critères.
+    </p>
+
+    <!-- Grille de livres -->
+    <div class="books-grid" *ngIf="booksList.length > 0">
+      <!-- On parcourt la liste de livres avec *ngFor -->
+      <article
+        class="book-card"
+        *ngFor="let book of booksList"
+        (click)="goToDetails(book)"
+      >
+        <img
+          [src]="getCoverUrl(book)"
+          [alt]="book.title"
+        />
+        <div class="book-info">
+          <h2>{{ book.title }}</h2>
+          <p *ngIf="book.first_publish_year">
+            Première publication : {{ book.first_publish_year }}
+          </p>
+          <p *ngIf="book.edition_count">
+            Nombre d'éditions : {{ book.edition_count }}
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+

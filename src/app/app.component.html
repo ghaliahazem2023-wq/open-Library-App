@@ -1,0 +1,18 @@
+<!-- src/app/app.component.html -->
+<!-- Template principal de l'application. -->
+
+<!--
+  Le composant head-bar affiche le titre global.
+  Il est commun à toutes les pages.
+-->
+<app-head-bar></app-head-bar>
+
+<!--
+  router-outlet est une "zone" dans laquelle Angular affiche
+  le composant correspondant à l'URL courante.
+  Exemple :
+    - "/" affiche BookListComponent
+    - "/book/:id" affiche BookDetailsComponent
+-->
+<router-outlet></router-outlet>
+

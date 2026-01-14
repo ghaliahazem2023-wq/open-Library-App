@@ -1,0 +1,32 @@
+<!-- src/app/components/search-bar/search-bar.component.html -->
+<!-- Barre de recherche avec 2 champs : titre et année. -->
+
+<div class="search-bar">
+  <div class="search-fields">
+    <!-- Champ titre avec icône loupe -->
+    <div class="search-field-wrapper">
+      <span class="field-icon">🔍</span>
+      <input
+        type="text"
+        placeholder="Rechercher par titre..."
+        [(ngModel)]="titleQuery"
+      />
+    </div>
+
+    <!-- Champ année avec icône calendrier -->
+    <div class="search-field-wrapper">
+      <span class="field-icon">📅</span>
+      <input
+        type="number"
+        placeholder="Année de publication"
+        [(ngModel)]="yearQuery"
+      />
+    </div>
+  </div>
+
+  <button class="search-button" (click)="onSearchClick()">
+    <span>Rechercher</span>
+    <span class="button-icon">🔎</span>
+  </button>
+</div>
+

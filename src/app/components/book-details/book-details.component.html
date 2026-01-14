@@ -1,0 +1,44 @@
+<!-- src/app/components/book-details/book-details.component.html -->
+<!-- Page affichant les détails d'un livre. -->
+
+<main class="book-details-container">
+  <!-- Affichage du message de chargement -->
+  <p *ngIf="isLoading" class="info-message">
+    Chargement des détails du livre...
+  </p>
+
+  <!-- Affichage du message d'erreur -->
+  <p *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </p>
+
+  <!-- Affichage des détails uniquement si on a un livre et pas d'erreur -->
+  <section *ngIf="!isLoading && !errorMessage && book" class="details-card">
+    <div class="details-header">
+      <div class="cover" *ngIf="getCoverUrl(); else noCover">
+        <img [src]="getCoverUrl()!" [alt]="book.title" />
+      </div>
+      <ng-template #noCover>
+        <div class="no-cover">
+          Pas de couverture disponible
+        </div>
+      </ng-template>
+
+      <div class="main-info">
+        <h1>{{ book.title }}</h1>
+        <h2 *ngIf="book.subtitle">{{ book.subtitle }}</h2>
+        <p *ngIf="book.first_publish_year">
+          Première publication : {{ book.first_publish_year }}
+        </p>
+      </div>
+    </div>
+
+    <div class="description" *ngIf="book.description">
+      <h3>Description</h3>
+      <p>
+        {{ book.description }}
+      </p>
+    </div>
+  </section>
+</main>
+

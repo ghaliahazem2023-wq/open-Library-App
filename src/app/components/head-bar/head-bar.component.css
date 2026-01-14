@@ -1,0 +1,51 @@
+/* src/app/components/head-bar/head-bar.component.css */
+/* Barre supérieure moderne, avec fond dégradé */
+
+.head-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(90deg, #0f172a, #1e293b, #0f172a);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  color: var(--text-main);
+  padding: 1rem 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.head-bar-title {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.head-bar-emoji {
+  font-size: 1.4em;
+}
+
+.head-bar-text {
+  background: linear-gradient(120deg, #38bdf8, #22c55e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 640px) {
+  .head-bar {
+    padding-inline: 1.25rem;
+  }
+
+  .head-bar-title {
+    letter-spacing: 0.04em;
+  }
+}
